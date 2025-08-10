@@ -1,4 +1,4 @@
-        // Enhanced smooth scrolling with offset
+// Enhanced smooth scrolling with offset
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -13,6 +13,7 @@
             });
         });
 
+        
         // Enhanced theme toggle with more sophisticated transitions
         const themeToggle = document.getElementById('theme-toggle');
         let currentTheme = 0;
@@ -67,38 +68,74 @@
             }, 500);
         });
 
-        // Enhanced form submission with better UX
-        const messageForm = document.getElementById('messageForm');
-        messageForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
-            if (!formData.name || !formData.email || !formData.message) {
-                showNotification('⚠️ Por favor, completa todos los campos obligatorios.', 'warning');
-                return;
-            }
-            
-            const submitBtn = document.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-            
-            setTimeout(() => {
-                showNotification('✅ ¡Mensaje enviado exitosamente! Te contactaré pronto.', 'success');
-                messageForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-            }, 2000);
+// js/main.js
+// Archivo principal de JavaScript para el CV interactivo
+// Asegúrate de que EmailJS esté cargado antes de usarlo
+// Carga de EmailJS
+if (typeof emailjs === 'undefined') {
+    const script = document.createElement('script');
+    script.src = "https://cdn.emailjs.com/dist/email.min.js";
+    script.onload = () => {
+        console.log('EmailJS cargado correctamente.');
+    };
+    script.onerror = () => {
+        console.error('Error al cargar EmailJS. Asegúrate de que la URL sea correcta.');
+    };
+    document.head.appendChild(script);
+} else {
+    console.log('EmailJS ya está cargado.');
+}
+        // Inicializa EmailJS con tu Public Key
+(function() {
+    emailjs.init("XOFu19pY9Covtlhvp"); // Ej: "ABC12345xyz"
+})();
+
+// Manejo del formulario
+const messageForm = document.getElementById('messageForm');
+
+messageForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        date_sent: new Date().toLocaleString()
+    };
+    
+    // Validación de campos
+    if (!formData.from_name || !formData.from_email || !formData.message) {
+        showNotification('⚠️ Por favor, completa todos los campos obligatorios.', 'warning');
+        return;
+    }
+    
+    // Botón en estado de carga
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+    
+    // Envío del formulario usando EmailJS
+    emailjs.send("service_ddobqne", "template_sx2mqe9", formData)
+        .then(() => {
+            showNotification('✅ ¡Mensaje enviado exitosamente! Te contactaré pronto.', 'success');
+            messageForm.reset();
+        })
+        .catch((error) => {
+            console.error('Error al enviar el mensaje:', error);
+            showNotification('❌ Ocurrió un error al enviar el mensaje. Inténtalo más tarde.', 'error');
+        })
+        .finally(() => {
+            // Restaurar botón
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
         });
+});
+
+
 
         // Enhanced notification system
         function showNotification(message, type) {
