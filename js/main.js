@@ -392,35 +392,116 @@ menuBtn?.addEventListener('click', (e)=>{
 });
 
 
-// ===== Exportar a PDF (CV con diseño, texto negro) =====
+// ===== Exportar a PDF (CV con diseño, A4 auto V/H con clonado) =====
 const exportDesignBtn = document.getElementById('download-pdf-design');
-exportDesignBtn?.addEventListener('click', async ()=>{
+
+function pickOrientationAuto(rootEl){
+  // Medimos el layout actual del CV (sin contar el viewport)
+  const rect = rootEl.getBoundingClientRect();
+  const width = Math.max(rootEl.scrollWidth, rect.width);
+  const height = Math.max(rootEl.scrollHeight, rect.height);
+  return width > height ? 'landscape' : 'portrait';
+}
+
+async function exportDesignPDF(event){
   const rootNode = document.getElementById('cv-root') || document.body;
 
+  // Forzar orientación con modificadores
+  // Shift = landscape, Alt = portrait; sin modificador = auto
+  let forced = null;
+  if (event?.shiftKey) forced = 'landscape';
+  if (event?.altKey) forced = 'portrait';
+
+  const orientation = forced || pickOrientationAuto(rootNode);
+  const isLandscape = orientation === 'landscape';
+
+  // Creamos un CLONE “sandbox” para render estable a tamaño A4 real
+  // Evita que el viewport, position:fixed o efectos afecten la captura
+  const sandbox = document.createElement('div');
+  sandbox.id = 'pdf-sandbox';
+  // El sandbox cubre toda la pantalla pero no interfiere (invisible detrás)
+  sandbox.style.cssText = `
+    position: fixed; inset: 0; z-index: -1; overflow: auto; 
+    background: #ffffff;
+  `;
+
+  // Contenedor A4 con ancho REAL en mm; el alto se adapta (múltiples páginas)
+  const pageWmm = isLandscape ? 297 : 210;
+  const pageHmm = isLandscape ? 210 : 297;
+
+  // Contenedor con ancho fijo A4 en mm para que el layout se recalibre a ese ancho
+  const paper = document.createElement('div');
+  paper.className = 'pdf-paper';
+  paper.style.cssText = `
+    width: ${pageWmm}mm; 
+    min-height: ${pageHmm}mm; 
+    margin: 0 auto;
+    background: #ffffff; 
+    color: #111111;
+  `;
+
+  // Clon profundo del CV
+  const clone = rootNode.cloneNode(true);
+  clone.id = 'cv-root-pdf-clone';
+
+  // Evitamos IDs duplicados en formularios/ancoras que puedan romper cosas
+  // (no crítico, pero sano)
+  clone.querySelectorAll('[id]').forEach(el=>{
+    if (el.id === 'messageForm') el.removeAttribute('id');
+  });
+
+  paper.appendChild(clone);
+  sandbox.appendChild(paper);
+  document.body.appendChild(sandbox);
+
+  // Esperamos fuentes
   try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch {}
 
-  document.documentElement.classList.add('exporting');
+  // Entramos en modo export (congela animaciones y pone texto negro)
+  document.documentElement.classList.add('exporting', isLandscape ? 'exporting-landscape' : 'exporting-portrait');
 
-  // Pausa efectos
+  // Pausamos efectos visuales activos
   if (window.__particlesIntervalId){ clearInterval(window.__particlesIntervalId); window.__particlesIntervalId = null; }
   if (window.__mouseTrailHandler){ document.removeEventListener('mousemove', window.__mouseTrailHandler, { passive:true }); }
 
+  // Opciones html2pdf
+  const opt = {
+    margin:       [0, 0, 0, 0],
+    filename:     `Josselyn-Pozo-CV-Diseno-${isLandscape?'H':'V'}.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { 
+      scale: Math.min(2, (window.devicePixelRatio || 1) * 1.5), 
+      useCORS: true, 
+      backgroundColor: '#ffffff',
+      scrollY: 0, 
+      logging: false 
+    },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation },
+    pagebreak:    { mode: ['css','legacy'] }
+  };
+
   try{
-    const opt = {
-      margin: [0,0,0,0],
-      filename: 'Josselyn-Pozo-CV-Diseno.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollY: 0, logging: false },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css','legacy'] }
-    };
-    await html2pdf().set(opt).from(rootNode).save();
+    // Capturamos desde el PAPER (que ya está a escala A4 real)
+    await html2pdf().set(opt).from(paper).save();
+
+    // Feedback: indicamos qué orientación se usó (auto o forzada)
+    if (!forced){
+      const msg = isLandscape 
+        ? 'A4 horizontal (auto: el layout es más ancho).' 
+        : 'A4 vertical (auto).';
+      showNotification(`📄 Exportado en ${msg}`, 'success');
+    } else {
+      showNotification(`📄 Exportado en A4 ${isLandscape?'horizontal':'vertical'} (forzado).`, 'success');
+    }
   }catch(err){
     console.error('PDF error', err);
     showNotification('❌ No se pudo generar el PDF.', 'error');
   }finally{
-    document.documentElement.classList.remove('exporting');
-    // Reactivar
+    // Limpieza
+    document.documentElement.classList.remove('exporting','exporting-landscape','exporting-portrait');
+    sandbox.remove();
+
+    // Reactivamos efectos
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && !window.__particlesIntervalId){
       window.__particlesIntervalId = setInterval(createFloatingParticle, 1500);
     }
@@ -428,4 +509,6 @@ exportDesignBtn?.addEventListener('click', async ()=>{
       document.addEventListener('mousemove', window.__mouseTrailHandler, { passive:true });
     }
   }
-});
+}
+
+exportDesignBtn?.addEventListener('click', exportDesignPDF);

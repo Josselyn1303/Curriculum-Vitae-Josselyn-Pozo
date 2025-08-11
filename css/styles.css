@@ -436,4 +436,89 @@ body::before{
   will-change: transform, opacity;
 }
 
-   
+
+/* ===== Ajustes específicos de exportación A4 ===== */
+
+/* El clon vive en #pdf-sandbox con fondo blanco y sin efectos */
+#pdf-sandbox .profile-photo-frame,
+#pdf-sandbox .hero::before,
+#pdf-sandbox body::before { display: none !important; }
+
+/* Asegura texto negro y elementos neutros dentro del clon también */
+#pdf-sandbox, 
+#pdf-sandbox * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+
+/* Evitar cortes agresivos de bloques grandes al paginar */
+#pdf-sandbox .avoid-break,
+#pdf-sandbox .experience-card,
+#pdf-sandbox .skills-column,
+#pdf-sandbox .timeline-item,
+#pdf-sandbox .about-content {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+/* ===== Fix de color para "Sobre Mí" durante export ===== */
+.exporting #about .about-content,
+#pdf-sandbox #about .about-content {
+  color: #111111 !important;
+}
+
+/* Quita el degradado/clip de títulos en export y pone negro */
+.exporting .section-title,
+#pdf-sandbox .section-title {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: #111111 !important;
+}
+
+/* Fondo de la tarjeta "about" a blanco en export (su ::after antes era oscuro) */
+.exporting #about .about-content::after,
+#pdf-sandbox #about .about-content::after {
+  background: #ffffff !important;
+}
+
+/* Y apagamos el borde arcoíris para que no “ensucie” el PDF */
+.exporting #about .about-content::before,
+#pdf-sandbox #about .about-content::before {
+  display: none !important;
+}
+/* ===== Paginado A4 por secciones en el clon del PDF ===== */
+/* Página 2: que empiece "Sobre Mí" y termine después de "Formación Académica" */
+#pdf-sandbox #about { 
+  break-before: page;       /* fuerza a arrancar nueva página (después del Hero) */
+  page-break-before: always; 
+}
+#pdf-sandbox #education {
+  break-before: avoid;      /* evita corte entre about y education */
+  page-break-before: avoid;
+  break-after: page;        /* cierra la página justo tras educación */
+  page-break-after: always;
+}
+
+/* Página 3: Experiencia (cae naturalmente tras la regla anterior) */
+#pdf-sandbox #experience {
+  break-before: page;       /* por si acaso, garantiza que arranca nueva página */
+  page-break-before: always;
+  break-after: page;        /* termina la página al final de experiencia */
+  page-break-after: always;
+}
+
+/* Página 4: Aptitudes e Idiomas (su propia página) */
+#pdf-sandbox #skills {
+  break-before: page;
+  page-break-before: always;
+  break-after: page;
+  page-break-after: always;
+}
+
+/* Opcional: Contacto en su propia página también (descomenta si lo quieres así)
+#pdf-sandbox #contact {
+  break-before: page;
+  page-break-before: always;
+}
+*/
