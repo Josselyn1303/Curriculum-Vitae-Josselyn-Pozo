@@ -1,326 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josselyn Pozo | Ingeniera de Software</title>
-    <meta name="description" content="CV profesional de Josselyn Pozo, estudiante de Ingeniería de Software">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>Josselyn Pozo | Ingeniera de Software</title>
+  <meta name="description" content="CV profesional de Josselyn Pozo, estudiante de Ingeniería de Software." />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-palette"></i>
-    </button>
+  <!-- Botón de tema -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+    <i class="fas fa-palette"></i>
+  </button>
 
+  <!-- Área exportable a PDF -->
+  <div id="cv-root">
     <header class="hero">
-<header class="hero">
-    <div class="hero-content">
-        <!-- Foto de perfil con marco neon -->
+      <div class="hero-content">
         <div class="profile-photo-container">
-            <div class="profile-photo-frame"></div>
-            <img src="./assets/profile.jpg" alt="Foto de Josselyn Pozo" class="profile-photo">
-            <!-- Si no tienes foto aún, puedes usar este placeholder -->
-            <!-- <div class="photo-placeholder">
-                <i class="fas fa-user"></i>
-            </div> -->
+          <div class="profile-photo-frame"></div>
+          <img src="./assets/profile.jpg" alt="Foto de Josselyn Pozo" class="profile-photo" width="200" height="200">
         </div>
-        
+
         <h1>Josselyn Alejandra Pozo Herrera</h1>
         <h2>Estudiante de Ingeniería de Software</h2>
+
         <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">
-                <i class="fas fa-rocket"></i>
-                Contactarme
-            </a>
-            <a href="./assets/cv-josselyn-pozo.pdf" download class="btn btn-secondary">
-                <i class="fas fa-download"></i> 
-                Descargar CV
-            </a>
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> Contactarme
+          </a>
+
+          <!-- Botón con menú desplegable -->
+          <div class="dropdown">
+            <button id="download-menu-btn" class="btn btn-secondary" type="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-download"></i> Descargar CV
+              <span class="caret"></span>
+            </button>
+            <div id="download-menu" class="dropdown-menu" role="menu" aria-hidden="true">
+              <button id="download-pdf-design" class="dropdown-item" type="button" role="menuitem">
+                <i class="fas fa-file-pdf"></i> CV con diseño (PDF)
+              </button>
+              <a class="dropdown-item" href="print.html?auto=1" target="_blank" rel="noopener" role="menuitem">
+                <i class="fas fa-file-alt"></i> CV ATS (PDF)
+              </a>
+            </div>
+          </div>
         </div>
-    </div>
-</header>
+      </div>
     </header>
 
     <main>
-        <section id="about" class="section">
-            <h2 class="section-title">Sobre Mí</h2>
-            <div class="about-content">
-                <p>Estudiante dedicada de Ingeniería de Software en la Escuela Politécnica Nacional, con experiencia en atención al cliente y habilidades interpersonales desarrolladas a través de diversos roles laborales. Poseo un fuerte sentido de responsabilidad, puntualidad y capacidad de adaptación a diferentes entornos tecnológicos y profesionales.</p>
-            </div>
-        </section>
+      <section id="about" class="section">
+        <h2 class="section-title">Sobre Mí</h2>
+        <div class="about-content avoid-break">
+          <p>Estudiante dedicada de Ingeniería de Software en la Escuela Politécnica Nacional, con experiencia en atención al cliente y habilidades interpersonales desarrolladas a través de diversos roles laborales. Poseo un fuerte sentido de responsabilidad, puntualidad y capacidad de adaptación a diferentes entornos tecnológicos y profesionales.</p>
+        </div>
+      </section>
 
-        <section id="education" class="section">
-            <h2 class="section-title">Formación Académica</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Ingeniería de Software</h3>
-                        <p class="timeline-date">Nov 2023 - Presente</p>
-                        <p class="timeline-location">Escuela Politécnica Nacional, Quito</p>
-                        <p>Cursando cuarto semestre con sólidos conocimientos en programación, algoritmos, estructuras de datos y metodologías de desarrollo de software. Enfoque en tecnologías modernas y mejores prácticas de la industria.</p>
-                    </div>
-                </div>
+      <section id="education" class="section">
+        <h2 class="section-title">Formación Académica</h2>
+        <div class="timeline avoid-break">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Ingeniería de Software</h3>
+              <p class="timeline-date">Nov 2023 - Presente</p>
+              <p class="timeline-location">Escuela Politécnica Nacional, Quito</p>
+              <p>Cursando cuarto semestre con sólidos conocimientos en programación, algoritmos, estructuras de datos y metodologías de desarrollo de software. Enfoque en tecnologías modernas y mejores prácticas de la industria.</p>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section id="experience" class="section">
-            <h2 class="section-title">Experiencia Laboral</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3>Camarero</h3>
-                    <p class="company">La Madrid, Quito</p>
-                    <p class="duration">Dic 2023 - Dic 2024</p>
-                    <ul class="responsibilities">
-                        <li>Servicio ágil de alimentos y bebidas con excelencia en atención</li>
-                        <li>Mantenimiento de ambiente limpio y organizado</li>
-                        <li>Toma eficiente de pedidos con alta precisión</li>
-                        <li>Preparación y limpieza de mesas con estándares de calidad</li>
-                        <li>Atención al cliente y colaboración efectiva con equipo de cocina</li>
-                        <li>Gestión de inventario y reposición de materiales</li>
-                    </ul>
-                </div>
-                
-                <div class="experience-card">
-                    <h3>Especialista en Limpieza</h3>
-                    <p class="company">La Madrid, Quito</p>
-                    <p class="duration">Dic 2023 - Dic 2024</p>
-                    <ul class="responsibilities">
-                        <li>Limpieza y desinfección profesional de mesas, sillas y superficies</li>
-                        <li>Reubicación estratégica de mobiliario para optimizar espacios</li>
-                        <li>Mantenimiento de estándares de higiene y seguridad</li>
-                    </ul>
-                </div>
-                
-                <div class="experience-card">
-                    <h3>Cuidadora Infantil (Freelance)</h3>
-                    <p class="company">Servicios Independientes, Quito</p>
-                    <p class="duration">Ene 2024 - Jul 2024</p>
-                    <ul class="responsibilities">
-                        <li>Apoyo académico personalizado en tareas escolares</li>
-                        <li>Cuidado y supervisión responsable de menores</li>
-                        <li>Tutorías en lectura, idiomas y materias desafiantes</li>
-                        <li>Desarrollo de actividades educativas y recreativas</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+      <section id="experience" class="section">
+        <h2 class="section-title">Experiencia Laboral</h2>
+        <div class="experience-grid">
+          <div class="experience-card avoid-break">
+            <h3>Camarero</h3>
+            <p class="company">La Madrid, Quito</p>
+            <p class="duration">Dic 2023 - Dic 2024</p>
+            <ul class="responsibilities">
+              <li>Servicio ágil de alimentos y bebidas con excelencia en atención</li>
+              <li>Mantenimiento de ambiente limpio y organizado</li>
+              <li>Toma eficiente de pedidos con alta precisión</li>
+              <li>Preparación y limpieza de mesas con estándares de calidad</li>
+              <li>Atención al cliente y colaboración efectiva con equipo de cocina</li>
+              <li>Gestión de inventario y reposición de materiales</li>
+            </ul>
+          </div>
 
-        <section id="skills" class="section">
-            <h2 class="section-title">Aptitudes e Idiomas</h2>
-            
-            <div class="skills-container">
-                <div class="skills-column">
-                    <h3 class="skills-subtitle">💼 Aptitudes Profesionales</h3>
-                    <ul class="skills-list">
-                        <li class="skill-item">
-                            <span class="skill-icon">⚡</span>
-                            <span class="skill-name">Puntualidad y actitud responsable</span>
-                        </li>
-                        <li class="skill-item">
-                            <span class="skill-icon">🤝</span>
-                            <span class="skill-name">Trato amable y servicio al cliente</span>
-                        </li>
-                        <li class="skill-item">
-                            <span class="skill-icon">🎯</span>
-                            <span class="skill-name">Organización y mantenimiento del orden</span>
-                        </li>
-                        <li class="skill-item">
-                            <span class="skill-icon">📋</span>
-                            <span class="skill-name">Seguimiento preciso de instrucciones</span>
-                        </li>
-                        <li class="skill-item">
-                            <span class="skill-icon">🔄</span>
-                            <span class="skill-name">Adaptabilidad a entornos diversos</span>
-                        </li>
-                        <li class="skill-item">
-                            <span class="skill-icon">🌟</span>
-                            <span class="skill-name">Perfil multifuncional y versátil</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="skills-column">
-                    <h3 class="skills-subtitle">🌍 Competencias Lingüísticas</h3>
-                    <div class="language-item">
-                        <div class="language-info">
-                            <span class="language-name">🇪🇸 Español</span>
-                            <span class="language-level">(Idioma Nativo)</span>
-                        </div>
-                        <div class="language-bar">
-                            <div class="language-progress" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="language-item">
-                        <div class="language-info">
-                            <span class="language-name">🇺🇸 Inglés</span>
-                            <span class="language-level">(Nivel B2 - Intermedio Avanzado)</span>
-                        </div>
-                        <div class="language-bar">
-                            <div class="language-progress" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 2rem;">
-                        <h4 style="color: var(--neon-green); margin-bottom: 1rem;">💻 Habilidades Técnicas</h4>
-                        <div class="skill-item">
-                            <span class="skill-icon">⚡</span>
-                            <span class="skill-name">Programación (Python, Java, JavaScript)</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-icon">⚡</span>
-                            <span class="skill-name">Estructuras de Datos y Algoritmos</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-icon">⚡</span>
-                            <span class="skill-name">Desarrollo Web (HTML, CSS)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+          <div class="experience-card avoid-break">
+            <h3>Especialista en Limpieza</h3>
+            <p class="company">La Madrid, Quito</p>
+            <p class="duration">Dic 2023 - Dic 2024</p>
+            <ul class="responsibilities">
+              <li>Limpieza y desinfección profesional de mesas, sillas y superficies</li>
+              <li>Reubicación estratégica de mobiliario para optimizar espacios</li>
+              <li>Mantenimiento de estándares de higiene y seguridad</li>
+            </ul>
+          </div>
 
-        <section id="contact" class="section contact-section">
-            <h2 class="section-title">Contacto</h2>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <div>
-                            <h3 class="contact-label">📍 Ubicación</h3>
-                            <p class="contact-text">La Vicentina, Quito, Ecuador</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-mobile-alt"></i></span>
-                        <div>
-                            <h3 class="contact-label">📱 Teléfono</h3>
-                            <p class="contact-text">+593 984108432</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
-                        <div>
-                            <h3 class="contact-label">✉️ Email</h3>
-                            <p class="contact-text">josselyn201013.jp@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-id-card"></i></span>
-                        <div>
-                            <h3 class="contact-label">🆔 Identificación</h3>
-                            <p class="contact-text">1727169631</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3 class="form-title">💬 Envíame un mensaje</h3>
-                    <form id="messageForm">
-                        <div class="form-group">
-                            <input type="text" id="name" placeholder="✨ Nombre completo" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="📧 Correo electrónico" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" placeholder="🎯 Asunto">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" rows="5" placeholder="💭 Tu mensaje aquí..." required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            Enviar Mensaje
-                        </button>
-                    </form>
-                </div>
+          <div class="experience-card avoid-break">
+            <h3>Cuidadora Infantil (Freelance)</h3>
+            <p class="company">Servicios Independientes, Quito</p>
+            <p class="duration">Ene 2024 - Jul 2024</p>
+            <ul class="responsibilities">
+              <li>Apoyo académico personalizado en tareas escolares</li>
+              <li>Cuidado y supervisión responsable de menores</li>
+              <li>Tutorías en lectura, idiomas y materias desafiantes</li>
+              <li>Desarrollo de actividades educativas y recreativas</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <h2 class="section-title">Aptitudes e Idiomas</h2>
+
+        <div class="skills-container">
+          <div class="skills-column avoid-break">
+            <h3 class="skills-subtitle">💼 Aptitudes Profesionales</h3>
+            <ul class="skills-list">
+              <li class="skill-item"><span class="skill-icon">⚡</span><span class="skill-name">Puntualidad y actitud responsable</span></li>
+              <li class="skill-item"><span class="skill-icon">🤝</span><span class="skill-name">Trato amable y servicio al cliente</span></li>
+              <li class="skill-item"><span class="skill-icon">🎯</span><span class="skill-name">Organización y mantenimiento del orden</span></li>
+              <li class="skill-item"><span class="skill-icon">📋</span><span class="skill-name">Seguimiento preciso de instrucciones</span></li>
+              <li class="skill-item"><span class="skill-icon">🔄</span><span class="skill-name">Adaptabilidad a entornos diversos</span></li>
+              <li class="skill-item"><span class="skill-icon">🌟</span><span class="skill-name">Perfil multifuncional y versátil</span></li>
+            </ul>
+          </div>
+
+          <div class="skills-column avoid-break">
+            <h3 class="skills-subtitle">🌍 Competencias Lingüísticas</h3>
+
+            <div class="language-item">
+              <div class="language-info">
+                <span class="language-name">🇪🇸 Español</span>
+                <span class="language-level">(Idioma Nativo)</span>
+              </div>
+              <div class="language-bar">
+                <div class="language-progress" style="width: 100%;"></div>
+              </div>
             </div>
-            
-            <div class="contact-map">
-                <h3 class="map-title">🗺️ Mi Ubicación</h3>
-                <div id="map-container">
-                    <div style="text-align: center;">
-                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--neon-cyan); margin-bottom: 1rem;"></i>
-                        <p>Mapa interactivo disponible con API de Google Maps</p>
-                        <p style="font-size: 0.9rem; opacity: 0.7;">La Vicentina, Quito, Ecuador</p>
-                    </div>
-                </div>
+
+            <div class="language-item">
+              <div class="language-info">
+                <span class="language-name">🇺🇸 Inglés</span>
+                <span class="language-level">(Nivel B2 - Intermedio Avanzado)</span>
+              </div>
+              <div class="language-bar">
+                <div class="language-progress" style="width: 75%;"></div>
+              </div>
             </div>
-        </section>
+
+            <div style="margin-top: 2rem;">
+              <h4 style="color: var(--neon-green); margin-bottom: 1rem;">💻 Habilidades Técnicas</h4>
+              <div class="skill-item"><span class="skill-icon">⚡</span><span class="skill-name">Programación (Python, Java, JavaScript)</span></div>
+              <div class="skill-item"><span class="skill-icon">⚡</span><span class="skill-name">Estructuras de Datos y Algoritmos</span></div>
+              <div class="skill-item"><span class="skill-icon">⚡</span><span class="skill-name">Desarrollo Web (HTML, CSS)</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <h2 class="section-title">Contacto</h2>
+
+        <div class="contact-container">
+          <div class="contact-info avoid-break">
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+              <div>
+                <h3 class="contact-label">📍 Ubicación</h3>
+                <p class="contact-text">La Vicentina, Quito, Ecuador</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fas fa-mobile-alt"></i></span>
+              <div>
+                <h3 class="contact-label">📱 Teléfono</h3>
+                <p class="contact-text"><a href="tel:+593984108432">+593 984108432</a></p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+              <div>
+                <h3 class="contact-label">✉️ Email</h3>
+                <p class="contact-text"><a href="mailto:josselyn201013.jp@gmail.com">josselyn201013.jp@gmail.com</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form avoid-break">
+            <h3 class="form-title">💬 Envíame un mensaje</h3>
+            <form id="messageForm" novalidate>
+              <div class="form-group">
+                <label for="name" class="sr-only">Nombre completo</label>
+                <input type="text" id="name" name="name" placeholder="✨ Nombre completo" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="email" class="sr-only">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="📧 Correo electrónico" required autocomplete="email" inputmode="email">
+              </div>
+              <div class="form-group">
+                <label for="subject" class="sr-only">Asunto</label>
+                <input type="text" id="subject" name="subject" placeholder="🎯 Asunto" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <label for="message" class="sr-only">Mensaje</label>
+                <textarea id="message" name="message" rows="5" placeholder="💭 Tu mensaje aquí..." required></textarea>
+              </div>
+
+              <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" class="hp">
+
+              <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="contact-map avoid-break">
+          <h3 class="map-title">🗺️ Mi Ubicación</h3>
+          <div id="map-container">
+            <div style="text-align: center;">
+              <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: var(--neon-cyan); margin-bottom: 1rem;"></i>
+              <p>Mapa interactivo disponible con API de Google Maps</p>
+              <p style="font-size: 0.9rem; opacity: 0.7;">La Vicentina, Quito, Ecuador</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h2 class="footer-name">Josselyn Pozo</h2>
-                <p class="footer-title">Estudiante de Ingeniería de Software</p>
-                <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
-                    "Construyendo el futuro a través del código y la innovación tecnológica"
-                </p>
-            </div>
-            
-            <div class="footer-links">
-                <div class="link-group">
-                    <h3 class="link-title">🚀 Navegación</h3>
-                    <ul>
-                        <li><a href="#about">Sobre mí</a></li>
-                        <li><a href="#education">Formación</a></li>
-                        <li><a href="#experience">Experiencia</a></li>
-                        <li><a href="#skills">Aptitudes</a></li>
-                        <li><a href="#contact">Contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div class="link-group">
-                    <h3 class="link-title">📞 Contacto Directo</h3>
-                    <ul>
-                        <li><a href="tel:+593984108432">📱 +593 984108432</a></li>
-                        <li><a href="mailto:josselyn201013.jp@gmail.com">✉️ josselyn201013.jp@gmail.com</a></li>
-                        <li><a href="#contact">💬 Formulario de contacto</a></li>
-                    </ul>
-                </div>
-                
-                <div class="link-group">
-                    <h3 class="link-title">🌐 Redes Sociales</h3>
-                    <div class="social-icons">
-                        <a href="https://linkedin.com/in/josselyn-pozo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/Josselyn1303" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.instagram.com/josselyn.pozo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h2 class="footer-name">Josselyn Pozo</h2>
+          <p class="footer-title">Estudiante de Ingeniería de Software</p>
+          <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+            "Construyendo el futuro a través del código y la innovación tecnológica"
+          </p>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; <span id="current-year">2025</span> Josselyn Alejandra Pozo Herrera. Todos los derechos reservados.</p>
-            <p class="footer-credits">Diseñado con 💜 y tecnología de vanguardia | Powered by Innovation ⚡</p>
+
+        <div class="footer-links">
+          <div class="link-group">
+            <h3 class="link-title">🚀 Navegación</h3>
+            <ul>
+              <li><a href="#about">Sobre mí</a></li>
+              <li><a href="#education">Formación</a></li>
+              <li><a href="#experience">Experiencia</a></li>
+              <li><a href="#skills">Aptitudes</a></li>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="link-group">
+            <h3 class="link-title">📞 Contacto Directo</h3>
+            <ul>
+              <li><a href="tel:+593984108432">📱 +593 984108432</a></li>
+              <li><a href="mailto:josselyn201013.jp@gmail.com">✉️ josselyn201013.jp@gmail.com</a></li>
+              <li><a href="#contact">💬 Formulario de contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="link-group">
+            <h3 class="link-title">🌐 Redes Sociales</h3>
+            <div class="social-icons">
+              <a href="https://linkedin.com/in/josselyn-pozo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://github.com/Josselyn1303" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.instagram.com/josselyn.pozo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year">2025</span> Josselyn Alejandra Pozo Herrera. Todos los derechos reservados.</p>
+        <p class="footer-credits">Diseñado con 💜 y tecnología de vanguardia | Powered by Innovation ⚡</p>
+      </div>
     </footer>
+  </div><!-- /cv-root -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  (function() {
-    emailjs.init("XOFu19pY9Covtlhvp"); // Reemplaza con tu Public Key
-  })();
-</script>
-<script src="js\main.js"></script>
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+:root{
+  --fg: #111;
+  --muted: #555;
+  --line: #dcdcdc;
+}
+
+*{box-sizing:border-box}
+html,body{padding:0;margin:0}
+body{
+  color:var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans";
+  font-size: 12pt;
+  line-height: 1.4;
+  background: #fff;
+  max-width: 830px;
+  margin: 32px auto;
+  padding: 0 28px;
+}
+
+/* Cabecera */
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.hdr-main h1{font-size: 22pt; margin:0 0 4px; letter-spacing:.2px}
+.role{margin:0;color:var(--muted);font-size:11pt}
+.hdr-actions button{
+  font: inherit; font-weight:600; padding:8px 12px; background:#111; color:#fff; border:0; border-radius:6px; cursor:pointer;
+}
+.no-print{display:block}
+
+/* Estructura de bloques */
+.block{margin:20px 0}
+.block h2{
+  font-size:12.5pt; margin:0 0 8px; padding:0;
+  border-bottom: 1px solid var(--line);
+  letter-spacing:.3px;
+}
+.block h3{font-size:11.5pt; margin:0 0 2px}
+
+/* Contacto */
+.plain{list-style:none; padding:0; margin:0}
+.plain li{margin:3px 0}
+a{color:inherit; text-decoration:underline}
+
+/* Ítems */
+.item{margin:12px 0 16px}
+.item-hdr{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+.item-hdr .meta{color:var(--muted); font-size:10.5pt}
+.dates{white-space:nowrap; font-size:10.5pt; color:var(--muted)}
+.item ul{margin:6px 0 0 16px}
+.item ul li{margin:3px 0}
+
+/* Chips de skills */
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 8px}
+.chips span{
+  border:1px solid var(--line); padding:3px 8px; border-radius:8px; font-size:10.5pt; background:#fafafa;
+}
+
+/* Dos columnas (pantalla) */
+.two-cols{display:grid; grid-template-columns: 1fr 1fr; gap:16px}
+
+/* Footer */
+.ftr{margin-top:16px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:10.5pt}
+
+/* Impresión */
+@media print{
+  @page{ size: A4; margin: 14mm 14mm 16mm 14mm; }
+  body{ max-width: none; margin: 0; padding: 0 6mm; }
+  .no-print{display:none !important}
+  .block, .item{break-inside: avoid; page-break-inside: avoid}
+  a[href]:after{
+    content: " <" attr(href) ">";
+    font-size: 10pt; color: var(--muted);
+  }
+  .two-cols{grid-template-columns: 1fr}
+}
